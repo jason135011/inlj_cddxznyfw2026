@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>成都电信职业技能培育中心</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #F5F6F8;
+  font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.7;
+  max-width: 750px;
+  margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+
+/* 全局 */
+.card { background: #fff; border-radius: 10px; padding: 18px; margin: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.section-title { display: flex; align-items: center; font-size: 18px; font-weight: 700; color: #222; margin: 20px 14px 6px; }
+.section-title::before { content: ''; display: inline-block; width: 5px; height: 18px; background: #C00000; border-radius: 3px; margin-right: 10px; }
+
+/* 头部 */
+.hero { background: #C00000; padding: 30px 22px 32px; color: #fff; }
+.hero-title { font-size: 16px; font-weight: 800; letter-spacing: 1px; }
+.hero-sub { font-size: 24px; font-weight: 700; opacity: .95; margin-top: 8px; line-height: 1.4; }
+.hero-flex { display: flex; align-items: center; }
+.hero-main { flex: 1; }
+.lv-badge { width: 56px; height: 56px; border-radius: 12px; background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.4); color: #fff; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-right: 14px; }
+.hero-stats { display: flex; margin-top: 16px; background: rgba(255,255,255,.12); border-radius: 8px; padding: 10px 0; }
+.hs { flex: 1; text-align: center; }
+.hs .n { display: block; font-size: 20px; font-weight: 800; }
+.hs .u { font-size: 12px; opacity: .8; }
+
+/* 认证体系卡片 */
+.lv-row { display: flex; gap: 12px; margin: 12px 14px 0; }
+.lv-card { flex: 1; background: #fff; border-radius: 10px; padding: 18px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.05); display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+.lv-badge-sm { width: 48px; height: 48px; border-radius: 50%; background: #C00000; color: #fff; font-size: 19px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.lv-name { font-size: 17px; font-weight: 700; color: #222; }
+.lv-meta { font-size: 14px; color: #C00000; font-weight: 600; margin-top: 3px; }
+.lv-focus { margin-top: 8px; font-size: 13px; color: #666; background: #F7F8FA; border-radius: 6px; padding: 5px 10px; }
+.lv-mods { margin-top: 8px; font-size: 12px; color: #999; line-height: 1.6; text-align: center; }
+
+/* 统一场景 */
+.scene-name { font-size: 19px; font-weight: 800; color: #C00000; }
+.scene-desc { font-size: 15px; color: #444; margin: 6px 0 12px; }
+.scene-logic { display: flex; align-items: center; justify-content: center; margin: 4px 0 10px; }
+.sl-node { background: #C00000; color: #fff; font-size: 15px; font-weight: 700; padding: 6px 20px; border-radius: 6px; }
+.sl-arrow { color: #C00000; font-size: 18px; font-weight: 800; margin: 0 10px; }
+.scene-tip { font-size: 14px; color: #8a5a00; background: #FFF8EC; border-radius: 6px; padding: 10px 12px; }
+
+/* 考试纪律 */
+.notice-i { display: flex; margin-bottom: 10px; }
+.notice-i:last-child { margin-bottom: 0; }
+.ni-dot { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #C00000; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center; margin-right: 10px; margin-top: 2px; }
+.ni-x { flex: 1; font-size: 15px; color: #333; }
+
+/* 服务规范表 */
+.ded-table .tr { display: flex; border-bottom: 1px solid #F0F0F0; }
+.ded-table .tr:last-child { border-bottom: none; }
+.ded-table .tr.th { background: #C00000; border-radius: 6px; }
+.ded-table .tr.th .c { color: #fff; font-weight: 700; }
+.ded-table .c { flex: 1; padding: 10px 8px; font-size: 14px; color: #333; word-break: break-all; }
+.ded-tip { margin-top: 10px; font-size: 14px; color: #C00000; background: #FFF1F0; padding: 9px 12px; border-radius: 6px; }
+
+/* 考试流程 */
+.flow-list { margin: 6px 14px 0; }
+.flow-item { display: flex; align-items: flex-start; background: #fff; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.flow-item:last-child { margin-bottom: 0; }
+.fl-n { flex: none; width: 32px; height: 32px; border-radius: 8px; background: #FFF1F0; color: #C00000; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-right: 13px; }
+.fl-body { flex: 1; min-width: 0; }
+.fl-t { font-size: 17px; font-weight: 700; color: #222; }
+.fl-d { font-size: 14px; color: #888; margin-top: 4px; line-height: 1.6; }
+
+/* 使用指南 */
+.guide-list { margin: 6px 14px 0; }
+.gd-item { background: #fff; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.gd-item:last-child { margin-bottom: 0; }
+.gd-t { font-size: 16px; font-weight: 700; color: #222; }
+.gd-d { font-size: 14px; color: #777; margin-top: 5px; line-height: 1.7; }
+
+.foot { text-align: center; color: #bbb; font-size: 13px; padding: 24px 0 20px; }
+
+/* 三级/四级入口 */
+.entry-row { display: flex; gap: 10px; margin: 14px 14px 0; }
+.entry { flex: 1; background: #fff; border-radius: 8px; padding: 16px 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.05); cursor: pointer; }
+.entry:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+.e-ic { width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 8px; color: #fff; font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.ic1 { background: #2E5BFF; }
+.ic2 { background: #C00000; }
+.ic3 { background: #00A870; }
+.e-t { font-size: 15px; font-weight: 700; color: #222; }
+.e-d { font-size: 12px; color: #999; margin-top: 4px; }
+
+/* 模块列表 */
+.modwrap { padding: 6px 0; }
+.mod { display: flex; align-items: center; padding: 12px 14px; cursor: pointer; }
+.mod:hover { background: #FAFAFA; }
+.mod-idx { flex: none; width: 28px; height: 28px; border-radius: 6px; background: #F2F3F5; color: #999; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+.mod-idx.done { background: #E6F7F0; color: #00A870; }
+.mod-t { flex: 1; font-size: 15px; color: #333; }
+.mod-state { flex: none; font-size: 12px; color: #bbb; }
+.tipbar { text-align: center; font-size: 13px; color: #999; padding: 10px 24px 24px; }
+
+/* 子页面头部 */
+.head { background: #C00000; padding: 24px 20px 20px; color: #fff; }
+.h-t { font-size: 22px; font-weight: 800; }
+.h-d { font-size: 14px; opacity: .85; margin-top: 5px; }
+.h-tags { display: flex; gap: 8px; margin-top: 12px; }
+.h-tags span { font-size: 12px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.4); border-radius: 14px; padding: 4px 12px; }
+.h-note { font-size: 14px; background: rgba(255,255,255,.14); border-radius: 6px; padding: 9px 12px; margin-top: 10px; }
+.h-pre { font-size: 14px; background: rgba(255,255,255,.14); border-radius: 8px; padding: 9px 12px; margin-top: 10px; opacity: .95; }
+.h-prog { display: flex; align-items: center; margin-top: 12px; }
+.hp-bar { flex: 1; height: 8px; background: rgba(255,255,255,.25); border-radius: 4px; overflow: hidden; }
+.hp-in { height: 100%; background: #fff; border-radius: 4px; }
+.hp-t { flex: none; font-size: 13px; margin-left: 10px; opacity: .9; }
+
+/* 模块卡片 */
+.mod-card { display: flex; align-items: center; background: #fff; border-radius: 10px; margin: 12px 14px 0; padding: 16px 18px; box-shadow: 0 2px 8px rgba(0,0,0,.05); cursor: pointer; }
+.mod-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+.mc-idx { flex: none; width: 36px; height: 36px; border-radius: 10px; background: #F2F3F5; color: #999; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-right: 14px; }
+.mc-idx.done { background: #E6F7F0; color: #00A870; }
+.mc-main { flex: 1; min-width: 0; }
+.mc-t { font-size: 17px; font-weight: 700; color: #222; }
+.mc-sub { font-size: 13px; color: #999; margin-top: 4px; }
+.mc-arr { flex: none; color: #ccc; font-size: 22px; margin-left: 6px; }
+
+/* 图文流程 */
+.topbar { display: flex; align-items: center; background: #fff; padding: 12px 16px; border-bottom: 1px solid #EEE; position: sticky; top: 0; z-index: 50; }
+.tb-t { flex: 1; font-size: 17px; font-weight: 700; color: #222; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.bl-h1 { font-size: 22px; font-weight: 800; color: #C00000; text-align: center; padding: 20px 12px 16px; letter-spacing: 1px; }
+.bl-h2 { font-size: 18px; font-weight: 700; color: #1a1a1a; padding: 16px 8px 8px; border-left: 5px solid #C00000; margin: 10px 4px 4px; line-height: 1.5; }
+.bl-p { font-size: 16px; color: #333; padding: 5px 8px; word-break: break-all; line-height: 1.7; }
+.bl-p.strong { font-weight: 700; color: #111; }
+.bl-tip { background: #FFF1F0; border-left: 5px solid #C00000; border-radius: 6px; padding: 12px 14px; margin: 10px 4px; font-size: 16px; color: #C00000; font-weight: 600; word-break: break-all; line-height: 1.7; }
+.bl-fl { display: inline-block; background: #EAF1FF; color: #2E5BFF; font-size: 15px; font-weight: 700; padding: 6px 16px; border-radius: 6px; margin: 12px 4px 6px; }
+.bl-step { display: flex; margin: 8px 4px; padding: 10px 14px; background: #FFF8EC; border-radius: 6px; font-size: 16px; color: #8a5a00; font-weight: 600; word-break: break-all; }
+.bl-step::before { content: ''; flex: none; width: 10px; height: 10px; border-radius: 50%; background: #FF9F1C; margin: 8px 10px 0 0; }
+.bl-img { width: 100%; border-radius: 8px; margin: 10px 0; display: block; cursor: pointer; transition: opacity .2s; }
+.bl-img:hover { opacity: .9; }
+.bl-table { margin: 10px 4px; border-radius: 6px; overflow: hidden; border: 1px solid #E0E0E0; background: #fff; }
+.bl-table .tr { display: flex; }
+.bl-table .tr.th { background: #C00000; }
+.bl-table .tr.th .c { color: #fff; font-weight: 700; font-size: 14px; }
+.bl-table .tr.td { border-top: 1px solid #EEE; }
+.bl-table .tr.td:nth-child(even) { background: #FAFAFA; }
+.bl-table .c { flex: 1; padding: 10px 9px; font-size: 14px; word-break: break-all; text-align: left; color: #333; line-height: 1.6; }
+.bl-form { display: flex; align-items: baseline; padding: 8px 6px; font-size: 18px; font-weight: 700; color: #333; }
+.bl-form .line { flex: 1; border-bottom: 2px solid #bbb; margin: 0 6px; height: 20px; }
+
+.nav-btns { display: flex; gap: 12px; margin: 24px 0 8px; }
+.nv { flex: 1; text-align: center; font-size: 16px; color: #666; background: #fff; border-radius: 28px; padding: 12px 0; border: 1px solid #E5E5E5; cursor: pointer; }
+.nv.primary { background: #C00000; color: #fff; border-color: #C00000; font-weight: 700; }
+.nv.dis { opacity: .35; }
+.empty-tip { text-align: center; color: #999; font-size: 14px; padding: 30px 0; }
+
+/* 评分大纲 */
+.grp { background: #fff; border-radius: 8px; margin: 12px 14px 0; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.grp-h { display: flex; align-items: center; padding: 16px 18px; cursor: pointer; }
+.gh-t { flex: 1; display: flex; align-items: center; font-size: 17px; font-weight: 700; color: #222; }
+.gh-dot { width: 6px; height: 20px; background: #C00000; border-radius: 3px; margin-right: 10px; }
+.gh-arr { color: #bbb; font-size: 20px; transform: rotate(90deg); transition: transform .2s; }
+.gh-arr.up { transform: rotate(-90deg); }
+.grp-b { padding: 0 14px 14px; border-top: 1px solid #F5F5F5; }
+.it { background: #F9FAFB; border-radius: 6px; padding: 12px 14px; margin-top: 10px; }
+.it-top { display: flex; align-items: center; margin-bottom: 4px; }
+.it-cat { font-size: 12px; color: #2E5BFF; background: #F0F4FF; border-radius: 4px; padding: 3px 10px; }
+.it-c { font-size: 16px; font-weight: 700; color: #222; }
+.it-p { font-size: 14px; color: #555; margin-top: 4px; word-break: break-all; }
+.it-d { font-size: 13px; color: #C00000; background: #FFF1F0; border-radius: 6px; padding: 7px 10px; margin-top: 8px; word-break: break-all; }
+
+/* Tab栏 */
+.tabbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 750px; display: flex; background: #fff; border-top: 1px solid #EEE; z-index: 100; height: 60px; }
+.tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #9A9A9A; font-size: 13px; cursor: pointer; text-decoration: none; }
+.tab-item.active { color: #C00000; }
+.tab-icon { width: 26px; height: 26px; margin-bottom: 3px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; }
+
+.page-container { padding-bottom: 64px; min-height: 100vh; }
+.view { display: none; }
+.view.active { display: block; }
+.back-btn { position: fixed; top: 14px; left: 14px; z-index: 200; background: rgba(0,0,0,.45); color: #fff; border: none; border-radius: 24px; padding: 7px 18px; font-size: 15px; cursor: pointer; }
+.back-btn:hover { background: rgba(0,0,0,.6); }
+.img-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.92); z-index: 999; display: none; align-items: center; justify-content: center; }
+.img-modal.show { display: flex; }
+.img-modal img { max-width: 95%; max-height: 90vh; border-radius: 10px; }
+.img-modal .close-btn { position: absolute; top: 18px; right: 18px; color: #fff; font-size: 32px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="img-modal" id="imgModal" onclick="closeImgModal()">
+  <span class="close-btn">&times;</span>
+  <img id="modalImg" src="">
+</div>
+<button class="back-btn" id="backBtn" style="display:none" onclick="goBack()">&#8592; 返回</button>
+
+<div class="page-container">
+<div class="view active" id="view-home">
+  <div class="hero"><div class="hero-title" id="ovTitle"></div><div class="hero-sub" id="ovSub"></div></div>
+  <div class="section-title">认证体系</div>
+  <div class="lv-row" id="lvRow"></div>
+  <div class="section-title">统一企业场景</div>
+  <div class="card scene" id="sceneCard"></div>
+  <div class="section-title">考试纪律</div>
+  <div class="card" id="noticeCard"></div>
+  <div class="section-title">服务规范</div>
+  <div class="card" id="specCard"></div>
+  <div class="section-title">考试流程</div>
+  <div class="flow-list" id="flowList"></div>
+  <div class="section-title">使用指南</div>
+  <div class="guide-list" id="guideList"></div>
+  <div class="foot">依据2026年认证规则与标准编制 · 仅供内部学习</div>
+</div>
+
+<div class="view" id="view-l3">
+  <div class="hero"><div class="hero-flex"><div class="lv-badge">L3</div><div class="hero-main"><div class="hero-title">三级实操认证</div><div class="hero-sub" id="l3Sub"></div></div></div><div class="hero-stats" id="l3Stats"></div></div>
+  <div class="entry-row">
+    <div class="entry" onclick="navTo(3,'exam')"><div class="e-ic ic1">试</div><div class="e-t">实操内容</div><div class="e-d">融合场景版考试题</div></div>
+    <div class="entry" onclick="navTo(3,'list')"><div class="e-ic ic2">学</div><div class="e-t">实操流程学习</div><div class="e-d">图文步骤讲解</div></div>
+    <div class="entry" onclick="navTo(3,'score')"><div class="e-ic ic3">纲</div><div class="e-t">实操项目大纲</div><div class="e-d">考评项目与操作要求</div></div>
+  </div>
+  <div class="section-title">实操流程模块</div>
+  <div class="card modwrap" id="l3Mods"></div>
+  <div class="tipbar" id="l3Tip"></div>
+</div>
+
+<div class="view" id="view-l4">
+  <div class="hero"><div class="hero-flex"><div class="lv-badge">L4</div><div class="hero-main"><div class="hero-title">四级实操认证</div><div class="hero-sub" id="l4Sub"></div></div></div><div class="hero-stats" id="l4Stats"></div></div>
+  <div class="entry-row">
+    <div class="entry" onclick="navTo(4,'exam')"><div class="e-ic ic1">试</div><div class="e-t">实操内容</div><div class="e-d">融合场景版考试题</div></div>
+    <div class="entry" onclick="navTo(4,'list')"><div class="e-ic ic2">学</div><div class="e-t">实操流程学习</div><div class="e-d">图文步骤讲解</div></div>
+    <div class="entry" onclick="navTo(4,'score')"><div class="e-ic ic3">纲</div><div class="e-t">实操项目大纲</div><div class="e-d">考评项目与操作要求</div></div>
+  </div>
+  <div class="section-title">实操流程模块</div>
+  <div class="card modwrap" id="l4Mods"></div>
+  <div class="tipbar" id="l4Tip"></div>
+</div>
+
+<div class="view" id="view-sub"><div id="subContent"></div></div>
+</div>
+
+<div class="tabbar">
+  <a class="tab-item active" onclick="switchTab('home')"><div class="tab-icon">&#8962;</div>总模块</a>
+  <a class="tab-item" onclick="switchTab('l3')"><div class="tab-icon">&#9733;</div>三级模块</a>
+  <a class="tab-item" onclick="switchTab('l4')"><div class="tab-icon">&#9670;</div>四级模块</a>
+</div>
+
+<script src="data/overview.js"></script>
+<script src="data/modmeta.js"></script>
+<script src="data/l3-data.js"></script>
+<script src="data/l4-data.js"></script>
+<script>
+var learnedL3=JSON.parse(localStorage.getItem('learned_l3')||'{}');
+var learnedL4=JSON.parse(localStorage.getItem('learned_l4')||'{}');
+var currentLevel='',currentSubPage='',scoreGroups=[];
+function esc(s){return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function renderHome(){
+  var ov=window.OV_DATA;
+  document.getElementById('ovTitle').textContent=ov.title;
+  document.getElementById('ovSub').textContent=ov.subtitle;
+  var h='';
+  ov.levels.forEach(function(lv){
+    var tab=lv.level==3?'l3':'l4';
+    h+='<div class="lv-card" onclick="switchTab(\''+tab+'\')">';
+    h+='<div class="lv-badge-sm">L'+lv.level+'</div>';
+    h+='<div class="lv-name">'+esc(lv.name)+'</div>';
+    h+='<div class="lv-meta">'+esc(lv.duration)+'</div>';
+    h+='<div class="lv-focus">'+esc(lv.focus)+'</div>';
+    h+='<div class="lv-mods">'+esc(lv.moduleList)+'</div></div>';
+  });
+  document.getElementById('lvRow').innerHTML=h;
+  var sc=ov.scene;
+  var lh=sc.logic.map(function(l,i){return '<div class="sl-node">'+esc(l)+'</div>'+(i<sc.logic.length-1?'<span class="sl-arrow">&rarr;</span>':'');}).join('');
+  document.getElementById('sceneCard').innerHTML='<div class="scene-name">'+esc(sc.name)+'</div><div class="scene-desc">'+esc(sc.desc)+'</div><div class="scene-logic">'+lh+'</div><div class="scene-tip">'+esc(sc.logicTip)+'</div>';
+  document.getElementById('noticeCard').innerHTML=ov.notice.map(function(n,i){return '<div class="notice-i"><div class="ni-dot">'+(i+1)+'</div><div class="ni-x">'+esc(n)+'</div></div>';}).join('');
+  var sp=ov.serviceSpec,sh='<div class="ded-table"><div class="tr th">';
+  sp.head.forEach(function(x){sh+='<div class="c">'+esc(x)+'</div>';});sh+='</div>';
+  sp.rows.forEach(function(r){sh+='<div class="tr">';r.forEach(function(c){sh+='<div class="c">'+esc(c)+'</div>';});sh+='</div>';});
+  sh+='</div><div class="ded-tip">'+esc(sp.tip)+'</div>';
+  document.getElementById('specCard').innerHTML=sh;
+  document.getElementById('flowList').innerHTML=ov.flow.map(function(f){return '<div class="flow-item"><div class="fl-n">'+f.n+'</div><div class="fl-body"><div class="fl-t">'+esc(f.t)+'</div><div class="fl-d">'+esc(f.d)+'</div></div></div>';}).join('');
+  document.getElementById('guideList').innerHTML=ov.guide.map(function(g){return '<div class="gd-item"><div class="gd-t">'+esc(g.t)+'</div><div class="gd-d">'+esc(g.d)+'</div></div>';}).join('');
+}
+
+function renderLevel(level){
+  var meta=window.MM_DATA[level],data=level==3?window.L3_DATA:window.L4_DATA;
+  var learned=level==3?learnedL3:learnedL4;
+  var lc=Object.keys(learned).filter(function(k){return learned[k];}).length;
+  var p='l'+(level==3?3:4);
+  document.getElementById(p+'Sub').textContent=(level==3?'全场景综合交付 · ':'服务规范+FTTR-B+天翼视联+云电脑+安全大脑 · ')+meta.duration;
+  document.getElementById(p+'Stats').innerHTML='<div class="hs"><span class="n">'+meta.modules.length+'</span><span class="u">学习模块</span></div><div class="hs"><span class="n">'+lc+'</span><span class="u">已学模块</span></div>';
+  var h='';
+  meta.modules.forEach(function(m,i){
+    h+='<div class="mod" onclick="goFlow('+level+','+i+')"><div class="mod-idx '+(learned[i]?'done':'')+'">'+(i+1)+'</div><div class="mod-t">'+esc(m.t)+'</div><div class="mod-state">'+(learned[i]?'已学':'待学')+'</div></div>';
+  });
+  document.getElementById(p+'Mods').innerHTML=h;
+  document.getElementById(p+'Tip').textContent=level==3?'点击任意模块直接进入图文流程学习，红色卡片为讲解要点':'四级为核心模块，涵盖服务规范、基础宽带、视联、云电脑与安全大脑';
+}
+
+function navTo(level,page){
+  currentLevel=level;currentSubPage=page;
+  document.getElementById('backBtn').style.display='block';
+  hideAllViews();document.getElementById('view-sub').classList.add('active');
+  if(page=='exam')renderExam(level);else if(page=='list')renderList(level);else if(page=='score')renderScore(level);
+  window.scrollTo(0,0);
+}
+
+function goFlow(level,id){
+  currentLevel=level;currentSubPage='flow';
+  document.getElementById('backBtn').style.display='block';
+  hideAllViews();document.getElementById('view-sub').classList.add('active');
+  renderFlow(level,id);window.scrollTo(0,0);
+}
+
+function goBack(){
+  document.getElementById('backBtn').style.display='none';hideAllViews();
+  if(currentLevel==3){document.getElementById('view-l3').classList.add('active');renderLevel(3);}
+  else if(currentLevel==4){document.getElementById('view-l4').classList.add('active');renderLevel(4);}
+  else{document.getElementById('view-home').classList.add('active');}
+  currentSubPage='';window.scrollTo(0,0);
+}
+
+function renderExam(level){
+  var data=level==3?window.L3_DATA:window.L4_DATA,blocks=data.exam;
+  var h='<div class="page" style="padding-bottom:64px"><div class="head"><div class="h-t">'+(level==3?'三级':'四级')+'实操内容</div><div class="h-d">融合场景版 · 考试时长'+data.meta.duration+'</div><div class="h-tags"><span>场景化设计</span><span>实操调试</span><span>交付验收</span></div></div><div style="padding:8px 16px 0">';
+  blocks.forEach(function(b){
+    if(b.t=='h2')h+='<div class="bl-h2">'+esc(b.x)+'</div>';
+    else if(b.t=='tip')h+='<div class="bl-tip">'+esc(b.x)+'</div>';
+    else if(b.t=='form')h+='<div class="bl-form">'+esc(b.x)+'<div class="line"></div></div>';
+    else if(b.t=='p')h+='<div class="bl-p '+(b.b?'strong':'')+'">'+esc(b.x)+'</div>';
+    else if(b.t=='table'){h+='<div class="bl-table">';b.rows.forEach(function(r,ri){h+='<div class="tr '+(ri==0?'th':'td')+'">';r.forEach(function(c){h+='<div class="c">'+esc(c)+'</div>';});h+='</div>';});h+='</div>';}
+  });
+  h+='</div></div>';
+  document.getElementById('subContent').innerHTML=h;
+}
+
+function renderList(level){
+  var data=level==3?window.L3_DATA:window.L4_DATA,learned=level==3?learnedL3:learnedL4;
+  var lc=Object.keys(learned).filter(function(k){return learned[k];}).length;
+  var pct=data.meta.moduleCount?(lc/data.meta.moduleCount*100):0;
+  var h='<div class="page" style="padding-bottom:64px"><div class="head"><div class="h-t">实操流程与步骤讲解</div><div class="h-d">共'+data.meta.moduleCount+'个模块 · 讲学用</div>';
+  if(data.preamble)data.preamble.forEach(function(p){if(p.x)h+='<div class="h-pre">'+esc(p.x)+'</div>';});
+  h+='<div class="h-prog"><div class="hp-bar"><div class="hp-in" style="width:'+pct+'%"></div></div><span class="hp-t">已学 '+lc+'/'+data.meta.moduleCount+'</span></div></div>';
+  data.modules.forEach(function(m,i){
+    h+='<div class="mod-card" onclick="goFlow('+level+','+m.id+')"><div class="mc-idx '+(learned[m.id]?'done':'')+'">'+(learned[m.id]?'✓':(i+1))+'</div><div class="mc-main"><div class="mc-t">'+esc(m.title)+'</div>'+(m.sections&&m.sections.length?'<div class="mc-sub">'+m.sections.length+'个小节</div>':'')+'</div><div class="mc-arr">›</div></div>';
+  });
+  h+='<div class="foot">红色卡片为讲解要点，图片点击可放大</div></div>';
+  document.getElementById('subContent').innerHTML=h;
+}
+
+function renderFlow(level,id){
+  var data=level==3?window.L3_DATA:window.L4_DATA,m=data.modules[id];
+  if(!m)return;
+  var h='<div class="page" style="padding-bottom:64px"><div class="topbar"><div class="tb-t">'+esc(m.title)+'</div></div><div style="padding:6px 16px 0">';
+  m.blocks.forEach(function(b){
+    if(b.t=='h1')h+='<div class="bl-h1">'+esc(b.x)+'</div>';
+    else if(b.t=='h2')h+='<div class="bl-h2">'+esc(b.x)+'</div>';
+    else if(b.t=='tip')h+='<div class="bl-tip">'+esc(b.x)+'</div>';
+    else if(b.t=='fl')h+='<div class="bl-fl">'+esc(b.x)+'</div>';
+    else if(b.t=='step')h+='<div class="bl-step">'+esc(b.x)+'</div>';
+    else if(b.t=='p')h+='<div class="bl-p '+(b.b?'strong':'')+'">'+esc(b.x)+'</div>';
+    else if(b.t=='img')h+='<img class="bl-img" src="'+b.src+'" onclick="previewImg(\''+b.src+'\')" loading="lazy">';
+    else if(b.t=='table'){h+='<div class="bl-table">';b.rows.forEach(function(r,ri){h+='<div class="tr '+(ri==0?'th':'td')+'">';r.forEach(function(c){h+='<div class="c">'+esc(c)+'</div>';});h+='</div>';});h+='</div>';}
+  });
+  h+='<div class="nav-btns"><div class="nv'+(id>0?'':' dis')+'" onclick="'+(id>0?'goFlow('+level+','+(id-1)+')':'')+'">← 上一模块</div><div class="nv primary'+(id<data.modules.length-1?'':' dis')+'" onclick="'+(id<data.modules.length-1?'goFlow('+level+','+(id+1)+')':'')+'">下一模块 →</div></div><div style="height:12px"></div></div></div>';
+  document.getElementById('subContent').innerHTML=h;
+  if(level==3){learnedL3[id]=true;localStorage.setItem('learned_l3',JSON.stringify(learnedL3));}
+  else{learnedL4[id]=true;localStorage.setItem('learned_l4',JSON.stringify(learnedL4));}
+}
+
+function renderScore(level){
+  var data=level==3?window.L3_DATA:window.L4_DATA;
+  scoreGroups=data.score.map(function(g){return{name:g.name,items:g.items,open:false};});
+  var h='<div class="page" style="padding-bottom:64px"><div class="head"><div class="h-t">'+(level==3?'三级':'四级')+'实操项目大纲</div><div class="h-d">依据考官融合版评分表整理 · 供学员备考对照</div><div class="h-note">服务规范贯穿考试全过程</div></div>';
+  scoreGroups.forEach(function(g,gi){
+    if(!g.items.length)return;
+    h+='<div class="grp"><div class="grp-h" onclick="toggleGrp('+gi+')"><div class="gh-t"><div class="gh-dot"></div>'+esc(g.name)+'</div><div class="gh-arr '+(g.open?'up':'')+'">›</div></div>';
+    if(g.open){
+      h+='<div class="grp-b">';
+      g.items.forEach(function(item){
+        h+='<div class="it">';
+        if(item.cat)h+='<div class="it-top"><span class="it-cat">'+esc(item.cat)+'</span></div>';
+        if(item.c)h+='<div class="it-c">'+esc(item.c)+'</div>';
+        if(item.p)h+='<div class="it-p">'+esc(item.p)+'</div>';
+        if(item.d)h+='<div class="it-d">'+esc(item.d)+'</div>';
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  h+='<div style="height:12px"></div></div>';
+  document.getElementById('subContent').innerHTML=h;
+}
+
+function toggleGrp(idx){scoreGroups[idx].open=!scoreGroups[idx].open;renderScore(currentLevel);}
+function previewImg(src){document.getElementById('modalImg').src=src;document.getElementById('imgModal').classList.add('show');}
+function closeImgModal(){document.getElementById('imgModal').classList.remove('show');}
+function switchTab(tab){
+  document.getElementById('backBtn').style.display='none';hideAllViews();
+  document.querySelectorAll('.tab-item').forEach(function(el){el.classList.remove('active');});
+  if(tab=='home'){document.getElementById('view-home').classList.add('active');document.querySelectorAll('.tab-item')[0].classList.add('active');}
+  else if(tab=='l3'){document.getElementById('view-l3').classList.add('active');document.querySelectorAll('.tab-item')[1].classList.add('active');renderLevel(3);}
+  else if(tab=='l4'){document.getElementById('view-l4').classList.add('active');document.querySelectorAll('.tab-item')[2].classList.add('active');renderLevel(4);}
+  window.scrollTo(0,0);
+}
+function hideAllViews(){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});}
+renderHome();
+</script>
+</body>
+</html>
